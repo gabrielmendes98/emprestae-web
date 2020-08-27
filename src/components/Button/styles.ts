@@ -14,6 +14,10 @@ export const Container = styled.button`
   outline: 0;
   cursor: pointer;
 
+  &:hover {
+    opacity: 0.8;
+  }
+
   div {
     display: block;
     background: var(--primary-color);
@@ -34,5 +38,6 @@ export const Container = styled.button`
   span {
     color: #fff;
     width: 150px;
+    font-size: 16px;
   }
 `;

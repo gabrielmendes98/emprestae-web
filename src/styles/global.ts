@@ -9,6 +9,10 @@ export default createGlobalStyle`
     --input-color: #F0F0F5;
   }
 
+  #root {
+    padding: 60px 20px;
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -25,6 +29,10 @@ export default createGlobalStyle`
   input,
   button {
     font-family: Roboto, Arial, Helvetica, sans-serif;
+  }
+
+  ul {
+    list-style: none;
   }
 
   h1{

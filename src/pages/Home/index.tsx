@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FiMail } from 'react-icons/fi';
+import { FiMail, FiLogIn, FiUserPlus } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 
 import Button from '../../components/Button';
@@ -17,8 +17,14 @@ const Home = () => {
         <p>Faça login ou crie sua conta para solicitar e acompanhar seus empréstimos de forma simples e rápida.</p>
       </WelcomeContainer>
       <ActionsContainer>
-        <Button></Button>
-        <Button></Button>
+        <Button>
+          <FiLogIn />
+          Login
+        </Button>
+        <Button>
+          <FiUserPlus />
+          Cadastre-se
+        </Button>
       </ActionsContainer>
       <HowItWorksContainer>
         <h2>Como funciona?</h2>

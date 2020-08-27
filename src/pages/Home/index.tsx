@@ -17,14 +17,8 @@ const Home = () => {
         <p>Faça login ou crie sua conta para solicitar e acompanhar seus empréstimos de forma simples e rápida.</p>
       </WelcomeContainer>
       <ActionsContainer>
-        <Button>
-          <FiLogIn />
-          Login
-        </Button>
-        <Button>
-          <FiUserPlus />
-          Cadastre-se
-        </Button>
+        <Button icon={FiLogIn}>Login</Button>
+        <Button icon={FiUserPlus}>Cadastre-se</Button>
       </ActionsContainer>
       <HowItWorksContainer>
         <h2>Como funciona?</h2>

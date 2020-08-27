@@ -3,7 +3,8 @@ import { createGlobalStyle } from 'styled-components';
 export default createGlobalStyle`
   html {
     --primary-color: #3700B3;
-    --secondary-color: #4700E9;
+    --secondary-color: #322153;
+    --button-color: #4700E9;
     --text-color: #6c6c80;
     --input-color: #F0F0F5;
   }
@@ -26,13 +27,17 @@ export default createGlobalStyle`
     font-family: Roboto, Arial, Helvetica, sans-serif;
   }
 
-  h1,
+  h1{
+    color: var(--primary-color);
+    font-family: Ubuntu;
+  }
+
   h2,
   h3,
   h4,
   h5,
   h6 {
-    color: var(--primary-color);
+    color: var(--secondary-color);
     font-family: Ubuntu;
   }
 `;

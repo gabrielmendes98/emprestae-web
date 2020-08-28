@@ -21,7 +21,7 @@ const Home = () => {
           <Link to="/login">
             <Button icon={FiLogIn}>Login</Button>
           </Link>
-          <Link to="/signup">
+          <Link to="/sign-up">
             <Button icon={FiUserPlus}>Cadastre-se</Button>
           </Link>
         </ActionsContainer>

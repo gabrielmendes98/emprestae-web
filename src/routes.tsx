@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import ChangePassword from './pages/ChangePassword';
 import Profile from './pages/Profile';
+import LoanRequest from './pages/LoanRequest';
 
 const Routes = () => {
   return (
@@ -15,6 +16,7 @@ const Routes = () => {
       <Route path="/sign-up" component={SignUp} />
       <Route path="/change-password" component={ChangePassword} />
       <Route path="/profile/:id" component={Profile} />
+      <Route path="/loan-request" component={LoanRequest} />
     </Switch>
   );
 };

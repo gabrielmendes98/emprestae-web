@@ -8,8 +8,16 @@ import Button from '../../components/Button';
 import { Container } from './styles';
 
 const Login: React.FC<RouteComponentProps> = ({ history }) => {
-  function handleClick(e: React.MouseEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    // validar email e senha (formato)
+    // se estiver errado, mostra toast de erro
+
+    // http request pro backend pedindo login com aqueles dados
+    // se der tudo certo, loga e redireciona
+    // se nao, manda um toast de erro
+
     history.push('/user/12345');
   }
 
@@ -19,10 +27,10 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
       <div>
         <FiArrowLeft />
         <h2>Login</h2>
-        <form>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <Input icon={FiMail} placeholder="Digite seu e-mail" />
           <Input icon={FiLock} placeholder="Digite sua senha" />
-          <Button onClick={(e) => handleClick(e)}>Entrar</Button>
+          <Button>Entrar</Button>
         </form>
       </div>
     </Container>

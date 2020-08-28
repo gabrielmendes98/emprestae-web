@@ -47,6 +47,8 @@ export const Container = styled.div`
     > svg {
       color: var(--primary-color);
       align-self: flex-start;
+      height: 20px;
+      width: 20px;
     }
   }
 `;

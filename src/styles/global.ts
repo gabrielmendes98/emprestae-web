@@ -11,6 +11,7 @@ export default createGlobalStyle`
 
   #root {
     padding: 60px 20px;
+    height: 100vh;
   }
 
   * {

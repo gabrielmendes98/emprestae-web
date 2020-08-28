@@ -3,15 +3,17 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 300px;
   background: #f0f0f5;
-  border-radius: 15px;
+  border-radius: 5px;
   border: 0;
-  padding: 16px 24px;
+  padding: 15px 23px;
   color: #6c6c80;
   display: flex;
   align-items: center;
 
+  border: 1px solid transparent;
+
   &:focus-within {
-    border: 2px solid var(--primary-color);
+    border: 1px solid var(--primary-color);
   }
 
   input {

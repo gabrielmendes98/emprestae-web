@@ -15,7 +15,9 @@ const Profile = () => {
       <Link to="/loan-request">
         <Button icon={FiDollarSign}>Solicitar empréstimo</Button>
       </Link>
-      <Button icon={FiEye}>Ver meus empréstimos</Button>
+      <Link to="/my-loans">
+        <Button icon={FiEye}>Ver meus empréstimos</Button>
+      </Link>
       <Link to="/change-password">
         <Button icon={FiLock}>Mudar senha</Button>
       </Link>

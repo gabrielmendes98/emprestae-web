@@ -10,9 +10,9 @@ interface Props {
   value: number;
   agency: number;
   account: number;
-  received?: Date;
-  due?: Date;
-  paid?: Date;
+  received?: string;
+  due?: string;
+  paid?: string;
 }
 
 const LoanItem: React.FC<Props> = ({ status, number, value, agency, account, received, due, paid }) => {

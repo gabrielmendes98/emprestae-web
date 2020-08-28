@@ -18,14 +18,14 @@ const ChangePassword: React.FC<RouteComponentProps> = ({ history }) => {
     // se der tudo certo, redireciona para o perfil
     // se nao, manda um toast de erro
 
-    history.push('/user/12345');
+    history.push('/profile/12345');
   }
 
   return (
     <Container>
       <h1>Emprestaê</h1>
       <div>
-        <Link to="/user/12345">
+        <Link to="/profile/12345">
           <FiArrowLeft />
         </Link>
         <h2>Mudar senha</h2>

@@ -18,7 +18,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
     // se der tudo certo, loga e redireciona
     // se nao, manda um toast de erro
 
-    history.push('/user/12345');
+    history.push('/profile/12345');
   }
 
   return (

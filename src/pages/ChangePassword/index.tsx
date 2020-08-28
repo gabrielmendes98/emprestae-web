@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
-import { FiArrowLeft, FiMail, FiLock, FiUser } from 'react-icons/fi';
+import { FiArrowLeft } from 'react-icons/fi';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';

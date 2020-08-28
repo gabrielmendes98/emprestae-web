@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Link } from 'react-router-dom';
 import { FiArrowLeft, FiMail, FiLock } from 'react-icons/fi';
 
 import Input from '../../components/Input';
@@ -25,7 +25,9 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
     <Container>
       <h1>Emprestaê</h1>
       <div>
-        <FiArrowLeft />
+        <Link to="/">
+          <FiArrowLeft />
+        </Link>
         <h2>Login</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
           <Input icon={FiMail} placeholder="Digite seu e-mail" />

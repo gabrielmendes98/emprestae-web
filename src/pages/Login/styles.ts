@@ -44,11 +44,13 @@ export const Container = styled.div`
       color: var(--primary-color);
     }
 
-    > svg {
-      color: var(--primary-color);
+    > a {
       align-self: flex-start;
-      height: 20px;
-      width: 20px;
+      svg {
+        color: var(--primary-color);
+        height: 20px;
+        width: 20px;
+      }
     }
   }
 `;

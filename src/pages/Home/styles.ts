@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { Container as Button } from '../../components/Button/styles';
-
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -48,7 +46,7 @@ export const ActionsContainer = styled.div`
   background: #fff;
   border-radius: 5px;
 
-  ${Button}:first-child {
+  a:first-child {
     margin-bottom: 20px;
   }
 `;

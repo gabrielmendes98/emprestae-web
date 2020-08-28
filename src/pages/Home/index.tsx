@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { FiMail, FiLogIn, FiUserPlus } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 

@@ -23,12 +23,15 @@ export const Container = styled.div`
     border-radius: 5px;
     padding: 20px;
 
-    > svg {
+    > a {
       align-self: flex-start;
-      width: 20px;
-      height: 20px;
-      margin-bottom: 20px;
-      color: var(--primary-color);
+
+      svg {
+        width: 20px;
+        height: 20px;
+        margin-bottom: 20px;
+        color: var(--primary-color);
+      }
     }
 
     > h2 {
@@ -45,6 +48,14 @@ export const LoanList = styled.ul`
     margin: 0 20px;
     padding: 12px 0;
     border-bottom: 1px solid #ccc;
+  }
+
+  @media (max-width: 350px) {
+    li {
+      margin: 0;
+      padding: 12px 0;
+      border-bottom: 1px solid #ccc;
+    }
   }
 
   li:first-of-type {

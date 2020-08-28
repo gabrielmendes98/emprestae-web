@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 import LoanItem from './LoanItem';
 import Pagination from './Pagination';
@@ -11,7 +12,10 @@ const MyLoans = () => {
     <Container>
       <h1>Emprestaê</h1>
       <div>
-        <FiArrowLeft />
+        <Link to="/profile/12345">
+          <FiArrowLeft />
+        </Link>
+
         <h2>Meus Empréstimos</h2>
         <LoanList>
           <LoanItem status="analise" number={12345} value={320.0} agency={1234} account={123456} />

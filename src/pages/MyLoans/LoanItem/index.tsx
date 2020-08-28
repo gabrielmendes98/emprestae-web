@@ -21,42 +21,42 @@ const LoanItem: React.FC<Props> = ({ status, number, value, agency, account, rec
       <StatusIcon status={status} />
       <div>
         <Line>
-          <span>Número:</span>
+          <span>Número: </span>
           <span>{number}</span>
         </Line>
 
         <Line>
-          <span>Valor:</span>
+          <span>Valor: </span>
           <span>R$ {value}</span>
         </Line>
 
         <Line>
-          <span>Agência:</span>
+          <span>Agência: </span>
           <span>{agency}</span>
         </Line>
 
         <Line>
-          <span>Conta:</span>
+          <span>Conta: </span>
           <span>{account}</span>
         </Line>
 
         {received && (
           <Line>
-            <span>Recebido:</span>
+            <span>Recebido: </span>
             <span>{received}</span>
           </Line>
         )}
 
         {due && (
           <Line>
-            <span>Vencimento:</span>
+            <span>Vencimento: </span>
             <span>{due}</span>
           </Line>
         )}
 
         {paid && (
           <Line>
-            <span>Pago dia:</span>
+            <span>Pago dia: </span>
             <span>{paid}</span>
           </Line>
         )}

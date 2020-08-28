@@ -20,7 +20,7 @@ const LoanRequest = () => {
     <Container>
       <h1>Emprestaê</h1>
       <div>
-        <Link to="/user/12345">
+        <Link to="/profile/12345">
           <FiArrowLeft />
         </Link>
         <h1>Solicitação de empréstimo</h1>

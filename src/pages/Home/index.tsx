@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { FiMail, FiLogIn, FiUserPlus } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
@@ -18,8 +19,12 @@ const Home = () => {
           <p>Faça login ou crie sua conta para solicitar e acompanhar seus empréstimos de forma simples e rápida.</p>
         </WelcomeContainer>
         <ActionsContainer>
-          <Button icon={FiLogIn}>Login</Button>
-          <Button icon={FiUserPlus}>Cadastre-se</Button>
+          <Link to="/login">
+            <Button icon={FiLogIn}>Login</Button>
+          </Link>
+          <Link to="/signup">
+            <Button icon={FiUserPlus}>Cadastre-se</Button>
+          </Link>
         </ActionsContainer>
         <HowItWorksContainer>
           <h2>Como funciona?</h2>

@@ -35,6 +35,10 @@ export default createGlobalStyle`
     list-style: none;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   h1{
     color: var(--primary-color);
     font-family: Ubuntu;

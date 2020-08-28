@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.button`
   height: 40px;
+  width: 190px;
   background: var(--button-color);
   border-radius: 5px;
   text-decoration: none;
@@ -21,7 +22,7 @@ export const Container = styled.button`
   div {
     display: block;
     background: var(--primary-color);
-    width: 40px;
+    min-width: 40px;
     height: 40px;
 
     display: flex;
@@ -36,8 +37,8 @@ export const Container = styled.button`
   }
 
   span {
+    width: 100%;
     color: #fff;
-    width: 150px;
     font-size: 16px;
   }
 `;

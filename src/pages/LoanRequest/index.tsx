@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, ChangeEvent, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft, FiCheck } from 'react-icons/fi';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import api from '../../services/api';
+import AuthContext from '../../contexts/auth';
 
 import {
   Container,
@@ -15,7 +17,39 @@ import {
   ValueParcelContainer,
 } from './styles';
 
+interface FormData {
+  name: string;
+  cpf: number;
+  agency: number;
+  account: number;
+  value: number;
+  accountType: string;
+  bank: string;
+  parcels: number;
+}
+
 const LoanRequest = () => {
+  const { user } = useContext(AuthContext);
+  const [formData, setFormData] = useState({
+    accountType: 'corrente',
+    parcels: 1,
+    bank: 'itau',
+  } as FormData);
+
+  function handleFormChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+    const { name, value } = event.target;
+
+    setFormData({ ...formData, [name]: value });
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    const { name, cpf, agency, account, value, accountType, bank, parcels } = formData;
+
+    await api.post(`/loans`, { name, cpf, agency, account, value, accountType, bank, parcels, userId: user!.id });
+  }
+
   return (
     <Container>
       <h1>Emprestaê</h1>
@@ -25,23 +59,23 @@ const LoanRequest = () => {
         </Link>
         <h1>Solicitação de empréstimo</h1>
         <h3>Preencha os campos com os dados do beneficiário</h3>
-        <form>
+        <form onSubmit={handleSubmit}>
           <NameContainer>
             <Field>
               <label>Nome completo</label>
-              <Input />
+              <Input name="name" onChange={handleFormChange} />
             </Field>
           </NameContainer>
 
           <CPFBankContainer>
             <Field>
               <label>CPF</label>
-              <Input />
+              <Input name="cpf" onChange={handleFormChange} />
             </Field>
 
             <Field>
               <label>Banco</label>
-              <Select>
+              <Select name="bank" onChange={handleFormChange}>
                 <option value="itau">Itau</option>
                 <option value="banco-do-brasil">Banco do Brasil</option>
               </Select>
@@ -51,17 +85,17 @@ const LoanRequest = () => {
           <AgencyAccountTypeContainer>
             <Field>
               <label>Agência</label>
-              <Input />
+              <Input name="agency" onChange={handleFormChange} />
             </Field>
 
             <Field>
               <label>Conta</label>
-              <Input />
+              <Input name="account" onChange={handleFormChange} />
             </Field>
 
             <Field>
               <label>Tipo de conta</label>
-              <Select>
+              <Select name="accountType" onChange={handleFormChange}>
                 <option value="corrente">Corrente</option>
                 <option value="poupanca">Poupança</option>
               </Select>
@@ -71,18 +105,18 @@ const LoanRequest = () => {
           <ValueParcelContainer>
             <Field>
               <label>Valor</label>
-              <Input />
+              <Input name="value" onChange={handleFormChange} />
             </Field>
 
             <Field>
               <label>Número de parcelas</label>
-              <Select>
-                <option value="1">1</option>
-                <option value="3">3</option>
-                <option value="5">5</option>
-                <option value="7">7</option>
-                <option value="9">9</option>
-                <option value="12">1</option>
+              <Select name="parcels" onChange={handleFormChange}>
+                <option value={1}>1</option>
+                <option value={3}>3</option>
+                <option value={5}>5</option>
+                <option value={7}>7</option>
+                <option value={9}>9</option>
+                <option value={12}>12</option>
               </Select>
             </Field>
           </ValueParcelContainer>

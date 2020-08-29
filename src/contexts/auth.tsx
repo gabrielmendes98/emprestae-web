@@ -1,23 +1,33 @@
 import React, { createContext, useState, useEffect } from 'react';
+import api from '../services/api';
 import Auth from '../services/auth';
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+}
 
 interface AuthContextData {
   signed: boolean;
-  user: object | null;
-  signIn(email: string, password: string): Promise<void>;
+  user: User | null;
+  signIn(email: string, password: string): Promise<User>;
   signOut(): void;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<object | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const user = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
     if (user && token) {
+      api.defaults.headers.Authorization = `Bearer ${token}`;
+
       setUser(JSON.parse(user));
     }
   }, []);
@@ -29,13 +39,17 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     setUser(user);
 
-    localStorage.setItem('customer', JSON.stringify(user));
+    localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('token', JSON.stringify(token));
+
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+
+    return user;
   }
 
   function signOut() {
     setUser(null);
-    localStorage.removeItem('customer');
+    localStorage.removeItem('user');
     localStorage.removeItem('token');
   }
 

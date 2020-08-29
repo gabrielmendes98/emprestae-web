@@ -1,8 +1,18 @@
 import api from './api';
 
+interface Response {
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    password: string;
+  };
+  token: string;
+}
+
 class Auth {
-  async signIn(email: string, password: string) {
-    const response = await api.post('session/user', { email, password });
+  async signIn(email: string, password: string): Promise<Response> {
+    const response = await api.post('/auth/login', { email, password });
     return response.data;
   }
 

@@ -47,7 +47,20 @@ const LoanRequest = () => {
 
     const { name, cpf, agency, account, value, accountType, bank, parcels } = formData;
 
-    await api.post(`/loans`, { name, cpf, agency, account, value, accountType, bank, parcels, userId: user!.id });
+    // Aqui estou passando o status no post, pois tenho um fake backend.
+    // Em uma aplicacao real, o proprio servidor backend iria setar o status para 'analise'
+    await api.post(`/loans`, {
+      name,
+      cpf,
+      agency,
+      account,
+      value,
+      accountType,
+      bank,
+      parcels,
+      userId: user!.id,
+      status: 'analise',
+    });
   }
 
   return (

@@ -39,23 +39,28 @@ const MyLoans = () => {
         </Link>
 
         <h2>Meus Empréstimos</h2>
-        <LoanList>
-          {loans.length !== 0 &&
-            loans.map((loan) => (
-              <LoanItem
-                key={loan.id}
-                status={loan.status}
-                number={loan.id}
-                value={loan.value}
-                agency={loan.agency}
-                account={loan.account}
-                due={loan.due}
-                received={loan.received}
-                paid={loan.paid}
-              />
-            ))}
-        </LoanList>
-        <Pagination />
+        {loans.length !== 0 ? (
+          <>
+            <LoanList>
+              {loans.map((loan) => (
+                <LoanItem
+                  key={loan.id}
+                  status={loan.status}
+                  number={loan.id}
+                  value={loan.value}
+                  agency={loan.agency}
+                  account={loan.account}
+                  due={loan.due}
+                  received={loan.received}
+                  paid={loan.paid}
+                />
+              ))}
+            </LoanList>
+            <Pagination />
+          </>
+        ) : (
+          <h2>Você ainda não tem empréstimos.</h2>
+        )}
       </div>
     </Container>
   );

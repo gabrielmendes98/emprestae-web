@@ -37,6 +37,11 @@ export const Container = styled.div`
     > h2 {
       color: var(--primary-color);
       margin-bottom: 30px;
+
+      &:last-of-type {
+        color: var(--text-color);
+        text-align: center;
+      }
     }
   }
 `;

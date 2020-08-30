@@ -34,7 +34,7 @@ const MyLoans = () => {
     <Container>
       <h1>Emprestaê</h1>
       <div>
-        <Link to="/profile/12345">
+        <Link to="/profile">
           <FiArrowLeft />
         </Link>
 

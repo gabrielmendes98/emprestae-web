@@ -17,7 +17,7 @@ const Routes = () => {
       <Route path="/sign-up" component={SignUp} />
 
       <Route path="/change-password" component={ChangePassword} />
-      <Route path="/profile/:id" component={Profile} />
+      <Route path="/profile" component={Profile} />
       <Route path="/loan-request" component={LoanRequest} />
       <Route path="/my-loans" component={MyLoans} />
     </Switch>

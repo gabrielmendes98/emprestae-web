@@ -35,7 +35,7 @@ const SignUp: React.FC<RouteComponentProps> = ({ history }) => {
       await Auth.signUp(name, email, password);
       await signIn(email, password);
 
-      history.push('/profile/12345');
+      history.push('/profile');
     } catch (err) {
       console.log(err);
     }

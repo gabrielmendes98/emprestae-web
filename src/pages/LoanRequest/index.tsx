@@ -67,7 +67,7 @@ const LoanRequest = () => {
     <Container>
       <h1>Emprestaê</h1>
       <div>
-        <Link to="/profile/12345">
+        <Link to="/profile">
           <FiArrowLeft />
         </Link>
         <h1>Solicitação de empréstimo</h1>

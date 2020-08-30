@@ -1,5 +1,5 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -9,17 +9,33 @@ import Profile from './pages/Profile';
 import LoanRequest from './pages/LoanRequest';
 import MyLoans from './pages/MyLoans';
 
+import AuthContext from './contexts/auth';
+
+interface Props {
+  isPrivate: boolean;
+}
+
+const CustomRoute: React.FC<Props & any> = ({ isPrivate, ...rest }) => {
+  const { signed } = useContext(AuthContext);
+
+  if (isPrivate && !signed) {
+    return <Redirect to="/login" />;
+  }
+
+  return <Route {...rest} />;
+};
+
 const Routes = () => {
   return (
     <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/login" component={Login} />
-      <Route path="/sign-up" component={SignUp} />
+      <CustomRoute path="/" exact component={Home} />
+      <CustomRoute path="/login" component={Login} />
+      <CustomRoute path="/sign-up" component={SignUp} />
 
-      <Route path="/change-password" component={ChangePassword} />
-      <Route path="/profile" component={Profile} />
-      <Route path="/loan-request" component={LoanRequest} />
-      <Route path="/my-loans" component={MyLoans} />
+      <CustomRoute isPrivate path="/change-password" component={ChangePassword} />
+      <CustomRoute isPrivate path="/profile" component={Profile} />
+      <CustomRoute isPrivate path="/loan-request" component={LoanRequest} />
+      <CustomRoute isPrivate path="/my-loans" component={MyLoans} />
     </Switch>
   );
 };

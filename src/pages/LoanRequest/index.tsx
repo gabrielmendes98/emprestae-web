@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft, FiCheck } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
@@ -37,11 +37,13 @@ interface Bank {
 }
 
 const schema = Yup.object().shape({
-  name: Yup.string().required('O nome é obrigatória'),
-  cpf: Yup.number().min(11, 'Digite um CPF válido').max(11, 'Digite um CPF válido').required('O CPF é obrigatório'),
-  agency: Yup.number().min(4, 'Digite uma agência válida').required('A agência é obrigatória'),
+  value: Yup.number().required('O valor é obrigatório'),
   account: Yup.number().min(6, 'Digite uma conta válida').required('A conta é obrigatória'),
-  value: Yup.string().required('O valor é obrigatório'),
+  agency: Yup.number().min(4, 'Digite uma agência válida').required('A agência é obrigatória'),
+  cpf: Yup.string()
+    .test('len', 'Seu CPF deve ter 11 números', (val) => val?.length === 11)
+    .required('O CPF é obrigatório'),
+  name: Yup.string().required('O nome é obrigatório'),
 });
 
 const LoanRequest = () => {
@@ -54,6 +56,8 @@ const LoanRequest = () => {
   const [finalValue, setFinalValue] = useState(0);
   const [banks, setBanks] = useState([] as Bank[]);
 
+  const history = useHistory();
+
   function handleFormChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     const { name, value } = event.target;
 
@@ -63,22 +67,38 @@ const LoanRequest = () => {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    const { name, cpf, agency, account, value, accountType, bank, parcels } = formData;
+    try {
+      const { name, cpf, agency, account, value, accountType, bank, parcels } = formData;
 
-    // Aqui estou passando o status no post, pois tenho um fake backend.
-    // Em uma aplicacao real, o proprio servidor backend iria setar o status para 'analise'
-    await api.post(`/loans`, {
-      name,
-      cpf,
-      agency,
-      account,
-      value,
-      accountType,
-      bank,
-      parcels,
-      userId: user!.id,
-      status: 'analise',
-    });
+      await schema.validate({ name, cpf, agency, account, value });
+
+      // Aqui estou passando o status no post, pois tenho um fake backend.
+      // Em uma aplicacao real, o proprio servidor backend iria setar o status para 'analise'
+      await api.post(`/loans`, {
+        name,
+        cpf,
+        agency,
+        account,
+        value,
+        accountType,
+        bank,
+        parcels,
+        userId: user!.id,
+        status: 'analise',
+      });
+
+      toast.success('Solicitação realizada com sucesso!');
+
+      history.push('/profile');
+    } catch (err) {
+      if (err.name === 'ValidationError') {
+        toast.error(err.message);
+      } else if (err.response.data !== undefined) {
+        toast.error(err.response.data.message);
+      } else {
+        toast.error('Erro no servidor');
+      }
+    }
   }
 
   useEffect(() => {
@@ -88,7 +108,6 @@ const LoanRequest = () => {
   useEffect(() => {
     if (formData.value !== undefined) {
       setFinalValue((1 + formData.parcels / 50) * formData.value);
-      console.log((1 + formData.parcels / 50) * formData.value);
     }
   }, [formData.value, formData.parcels]);
 
@@ -150,8 +169,8 @@ const LoanRequest = () => {
 
           <ValueParcelContainer>
             <Field>
-              <label>Valor</label>
-              <Input name="value" onChange={handleFormChange} />
+              <label>Valor em reais</label>
+              <Input name="value" onChange={handleFormChange} type="number" step="any" />
             </Field>
 
             <Field>

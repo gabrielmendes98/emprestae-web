@@ -23,7 +23,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log(user);
+
     try {
       await schema.validate({ email, password });
 

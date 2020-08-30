@@ -14,12 +14,14 @@ interface AuthContextData {
   user: User | null;
   signIn(email: string, password: string): Promise<User>;
   signOut(): void;
+  loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const user = localStorage.getItem('user');
@@ -30,6 +32,8 @@ export const AuthProvider: React.FC = ({ children }) => {
 
       setUser(JSON.parse(user));
     }
+
+    setLoading(false);
   }, []);
 
   async function signIn(email: string, password: string) {
@@ -54,7 +58,9 @@ export const AuthProvider: React.FC = ({ children }) => {
     api.defaults.headers.Authorization = undefined;
   }
 
-  return <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, loading }}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthContext;

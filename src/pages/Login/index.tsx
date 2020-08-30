@@ -16,14 +16,14 @@ const schema = Yup.object().shape({
 });
 
 const Login: React.FC<RouteComponentProps> = ({ history }) => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, user } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-
+    console.log(user);
     try {
       await schema.validate({ email, password });
 

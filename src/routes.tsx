@@ -16,7 +16,9 @@ interface Props {
 }
 
 const CustomRoute: React.FC<Props & any> = ({ isPrivate, ...rest }) => {
-  const { signed } = useContext(AuthContext);
+  const { loading, signed } = useContext(AuthContext);
+
+  if (loading) return <h1>Loading...</h1>;
 
   if (isPrivate && !signed) {
     return <Redirect to="/login" />;

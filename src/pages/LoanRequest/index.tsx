@@ -1,6 +1,8 @@
 import React, { useState, ChangeEvent, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft, FiCheck } from 'react-icons/fi';
+import { toast } from 'react-toastify';
+import * as Yup from 'yup';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -33,6 +35,14 @@ interface Bank {
   name: string;
   value: string;
 }
+
+const schema = Yup.object().shape({
+  name: Yup.string().required('O nome é obrigatória'),
+  cpf: Yup.number().min(11, 'Digite um CPF válido').max(11, 'Digite um CPF válido').required('O CPF é obrigatório'),
+  agency: Yup.number().min(4, 'Digite uma agência válida').required('A agência é obrigatória'),
+  account: Yup.number().min(6, 'Digite uma conta válida').required('A conta é obrigatória'),
+  value: Yup.string().required('O valor é obrigatório'),
+});
 
 const LoanRequest = () => {
   const { user } = useContext(AuthContext);
@@ -102,7 +112,7 @@ const LoanRequest = () => {
           <CPFBankContainer>
             <Field>
               <label>CPF</label>
-              <Input name="cpf" onChange={handleFormChange} />
+              <Input name="cpf" onChange={handleFormChange} maxLength={11} type="number" />
             </Field>
 
             <Field>
@@ -121,12 +131,12 @@ const LoanRequest = () => {
           <AgencyAccountTypeContainer>
             <Field>
               <label>Agência</label>
-              <Input name="agency" onChange={handleFormChange} />
+              <Input name="agency" onChange={handleFormChange} type="number" />
             </Field>
 
             <Field>
               <label>Conta</label>
-              <Input name="account" onChange={handleFormChange} />
+              <Input name="account" onChange={handleFormChange} type="number" />
             </Field>
 
             <Field>

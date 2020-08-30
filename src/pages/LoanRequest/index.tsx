@@ -28,6 +28,12 @@ interface FormData {
   parcels: number;
 }
 
+interface Bank {
+  id: number;
+  name: string;
+  value: string;
+}
+
 const LoanRequest = () => {
   const { user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
@@ -36,6 +42,7 @@ const LoanRequest = () => {
     bank: 'itau',
   } as FormData);
   const [finalValue, setFinalValue] = useState(0);
+  const [banks, setBanks] = useState([] as Bank[]);
 
   function handleFormChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     const { name, value } = event.target;
@@ -63,6 +70,10 @@ const LoanRequest = () => {
       status: 'analise',
     });
   }
+
+  useEffect(() => {
+    api.get('/banks').then((response) => setBanks(response.data));
+  }, []);
 
   useEffect(() => {
     if (formData.value !== undefined) {
@@ -97,8 +108,12 @@ const LoanRequest = () => {
             <Field>
               <label>Banco</label>
               <Select name="bank" onChange={handleFormChange}>
-                <option value="itau">Itau</option>
-                <option value="banco-do-brasil">Banco do Brasil</option>
+                {banks.length !== 0 &&
+                  banks.map((bank) => (
+                    <option key={String(bank.id)} value={bank.value}>
+                      {bank.name}
+                    </option>
+                  ))}
               </Select>
             </Field>
           </CPFBankContainer>

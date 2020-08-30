@@ -11,8 +11,8 @@ import AuthContext from '../../contexts/auth';
 import { Container } from './styles';
 
 const schema = Yup.object().shape({
-  email: Yup.string().email('Insira um e-mail válido').required('O e-mail é obrigatório'),
   password: Yup.string().min(6, 'Sua senha deve ter no mínimo 6 caracteres').required('A senha é obrigatória'),
+  email: Yup.string().email('Insira um e-mail válido').required('O e-mail é obrigatório'),
 });
 
 const Login: React.FC<RouteComponentProps> = ({ history }) => {

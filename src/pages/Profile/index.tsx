@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiDollarSign, FiEye, FiLock, FiLogOut } from 'react-icons/fi';
 
 import Button from '../../components/Button';
@@ -8,7 +8,14 @@ import AuthContext from '../../contexts/auth';
 import { Container } from './styles';
 
 const Profile = () => {
-  const { user } = useContext(AuthContext);
+  const { user, signOut } = useContext(AuthContext);
+
+  const history = useHistory();
+
+  function handleSignOut() {
+    signOut();
+    history.push('/');
+  }
 
   return (
     <Container>
@@ -24,7 +31,9 @@ const Profile = () => {
       <Link to="/change-password">
         <Button icon={FiLock}>Mudar senha</Button>
       </Link>
-      <Button icon={FiLogOut}>Sair</Button>
+      <Button icon={FiLogOut} onClick={handleSignOut}>
+        Sair
+      </Button>
     </Container>
   );
 };

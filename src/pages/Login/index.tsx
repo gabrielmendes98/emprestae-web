@@ -24,7 +24,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
     // se der tudo certo, loga e redireciona
     // se nao, manda um toast de erro
     try {
-      const user = await signIn(email, password);
+      await signIn(email, password);
       history.push(`/profile`);
     } catch (err) {
       console.log(err);

@@ -16,6 +16,10 @@ export const Container = styled.div`
     color: var(--text-color);
   }
 
+  a {
+    width: fit-content;
+  }
+
   ${Button} {
     width: 250px;
   }

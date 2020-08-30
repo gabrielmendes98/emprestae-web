@@ -51,6 +51,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     setUser(null);
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+    api.defaults.headers.Authorization = undefined;
   }
 
   return <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut }}>{children}</AuthContext.Provider>;

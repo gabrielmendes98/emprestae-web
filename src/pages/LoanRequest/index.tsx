@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, useContext } from 'react';
+import React, { useState, ChangeEvent, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft, FiCheck } from 'react-icons/fi';
 
@@ -35,6 +35,7 @@ const LoanRequest = () => {
     parcels: 1,
     bank: 'itau',
   } as FormData);
+  const [finalValue, setFinalValue] = useState(0);
 
   function handleFormChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     const { name, value } = event.target;
@@ -62,6 +63,13 @@ const LoanRequest = () => {
       status: 'analise',
     });
   }
+
+  useEffect(() => {
+    if (formData.value !== undefined) {
+      setFinalValue((1 + formData.parcels / 50) * formData.value);
+      console.log((1 + formData.parcels / 50) * formData.value);
+    }
+  }, [formData.value, formData.parcels]);
 
   return (
     <Container>
@@ -135,7 +143,14 @@ const LoanRequest = () => {
           </ValueParcelContainer>
 
           <h2>Valor final a pagar:</h2>
-          <h3>3 parcelas de R$ 0000,00</h3>
+          {finalValue !== 0 ? (
+            <h3>
+              {formData.parcels} parcelas de R$ {(finalValue / formData.parcels).toFixed(2)} = R${' '}
+              {finalValue.toFixed(2)}
+            </h3>
+          ) : (
+            <h3> </h3>
+          )}
 
           <Button icon={FiCheck}>Solicitar empréstimo</Button>
         </form>

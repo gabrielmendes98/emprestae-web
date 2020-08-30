@@ -1,12 +1,19 @@
 import React, { useContext, useState } from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
 import { FiArrowLeft, FiMail, FiLock } from 'react-icons/fi';
+import { toast } from 'react-toastify';
+import * as Yup from 'yup';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import AuthContext from '../../contexts/auth';
 
 import { Container } from './styles';
+
+const schema = Yup.object().shape({
+  email: Yup.string().email('Insira um e-mail válido').required('O e-mail é obrigatório'),
+  password: Yup.string().min(6, 'Sua senha deve ter no mínimo 6 caracteres').required('A senha é obrigatória'),
+});
 
 const Login: React.FC<RouteComponentProps> = ({ history }) => {
   const { signIn } = useContext(AuthContext);
@@ -17,17 +24,20 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    // validar email e senha (formato)
-    // se estiver errado, mostra toast de erro
-
-    // http request pro backend pedindo login com aqueles dados
-    // se der tudo certo, loga e redireciona
-    // se nao, manda um toast de erro
     try {
+      await schema.validate({ email, password });
+
       await signIn(email, password);
+
       history.push(`/profile`);
     } catch (err) {
-      console.log(err);
+      if (err.name === 'ValidationError') {
+        toast.error(err.message);
+      } else if (err.response.data !== undefined) {
+        toast.error(err.response.data.message);
+      } else {
+        toast.error('Erro no servidor');
+      }
     }
   }
 
@@ -49,6 +59,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
           <Input
             icon={FiLock}
             placeholder="Digite sua senha"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

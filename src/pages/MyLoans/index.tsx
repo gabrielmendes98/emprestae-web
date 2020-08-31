@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import LoanItem from './LoanItem';
 import Pagination from './Pagination';
@@ -22,13 +22,21 @@ interface Loan {
 
 const MyLoans = () => {
   const { user } = useContext(AuthContext);
+  const location = useLocation();
 
   const [loans, setLoans] = useState([] as Loan[]);
+  const [maxPage, setMaxPage] = useState(1);
 
   useEffect(() => {
-    if (user) api.get(`/users/${user!.id}/loans`).then((response) => setLoans(response.data));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+    const page = Number(new URLSearchParams(location.search).get('page'));
+
+    if (user)
+      api.get(`/users/${user!.id}/loans?_page=${page}&_limit=5`).then((response) => {
+        setLoans(response.data);
+        setMaxPage(Math.ceil(Number(response.headers['x-total-count']) / 5));
+        console.log(Math.ceil(Number(response.headers['x-total-count']) / 5));
+      });
+  }, [user, location.search]);
 
   return (
     <Container>
@@ -56,7 +64,7 @@ const MyLoans = () => {
                 />
               ))}
             </LoanList>
-            <Pagination />
+            <Pagination max={maxPage} />
           </>
         ) : (
           <h2>Você ainda não tem empréstimos.</h2>

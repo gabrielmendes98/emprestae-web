@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router';
+import { Link, useLocation } from 'react-router-dom';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 import { Container, NumbersContainer } from './styles';
 
-const Pagination = () => {
+interface Props {
+  max: number;
+}
+
+const Pagination: React.FC<Props> = ({ max }) => {
   const location = useLocation();
 
   const [page, setPage] = useState(1);
@@ -17,17 +20,21 @@ const Pagination = () => {
 
   return (
     <Container>
-      <Link to={`/my-loans?page=${page - 1}`}>
-        <FiChevronLeft />
-      </Link>
+      {page > 1 && (
+        <Link to={`/my-loans?page=${page - 1}`}>
+          <FiChevronLeft />
+        </Link>
+      )}
 
       <NumbersContainer>
         <span>{page}</span>
       </NumbersContainer>
 
-      <Link to={`/my-loans?page=${page + 1}`}>
-        <FiChevronRight />
-      </Link>
+      {page < max && (
+        <Link to={`/my-loans?page=${page + 1}`}>
+          <FiChevronRight />
+        </Link>
+      )}
     </Container>
   );
 };

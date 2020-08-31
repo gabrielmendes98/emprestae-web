@@ -19,6 +19,10 @@ export const Container = styled.div`
 
     max-width: 390px;
 
+    @media (min-width: 430px) {
+      min-width: 390px;
+    }
+
     background: #fff;
     border-radius: 5px;
     padding: 20px;
@@ -35,19 +39,20 @@ export const Container = styled.div`
     }
 
     > h2 {
+      color: var(--text-color);
+      text-align: center;
+    }
+
+    > h2:first-of-type {
       color: var(--primary-color);
       margin-bottom: 30px;
-
-      &:last-of-type {
-        color: var(--text-color);
-        text-align: center;
-      }
     }
   }
 `;
 
 export const LoanList = styled.ul`
   margin-bottom: 40px;
+  width: 100%;
 
   li {
     margin: 0 20px;

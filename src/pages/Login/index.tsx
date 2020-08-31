@@ -16,7 +16,7 @@ const schema = Yup.object().shape({
 });
 
 const Login: React.FC<RouteComponentProps> = ({ history }) => {
-  const { signIn, user } = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

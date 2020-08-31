@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { FiMail, FiLogIn, FiUserPlus } from 'react-icons/fi';
+import { FiMail, FiLogIn, FiUserPlus, FiUser } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 
 import Button from '../../components/Button';
+import AuthContext from '../../contexts/auth';
 
 import { Container, ActionsContainer, HowItWorksContainer, WelcomeContainer, HelpContainer } from './styles';
 
 const Home = () => {
+  const { signed, user } = useContext(AuthContext);
+
   return (
     <Container>
       <h1>Emprestaê</h1>
@@ -18,12 +21,23 @@ const Home = () => {
           <p>Faça login ou crie sua conta para solicitar e acompanhar seus empréstimos de forma simples e rápida.</p>
         </WelcomeContainer>
         <ActionsContainer>
-          <Link to="/login">
-            <Button icon={FiLogIn}>Login</Button>
-          </Link>
-          <Link to="/sign-up">
-            <Button icon={FiUserPlus}>Cadastre-se</Button>
-          </Link>
+          {signed ? (
+            <>
+              <h3>Bem-vindo(a) {user?.name}</h3>
+              <Link to="/profile">
+                <Button icon={FiUser}>Ver perfil</Button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/login">
+                <Button icon={FiLogIn}>Login</Button>
+              </Link>
+              <Link to="/sign-up">
+                <Button icon={FiUserPlus}>Cadastre-se</Button>
+              </Link>
+            </>
+          )}
         </ActionsContainer>
         <HowItWorksContainer>
           <h2>Como funciona?</h2>

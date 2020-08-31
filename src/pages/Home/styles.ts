@@ -49,6 +49,12 @@ export const ActionsContainer = styled.div`
   a:first-child {
     margin-bottom: 20px;
   }
+
+  > h3 {
+    color: var(--primary-color)
+    text-align: center;
+    margin-bottom: 30px;
+  }
 `;
 
 export const HowItWorksContainer = styled.div`

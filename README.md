@@ -53,4 +53,4 @@ https://github.com/gabrielmendes98/emprestae-server
 
 Totalmente funcional, inclusive com conexão com o backend, o qual está hospedado no Heroku.
 
-https://emprestae.netlify.app/profile
+https://emprestae.netlify.app

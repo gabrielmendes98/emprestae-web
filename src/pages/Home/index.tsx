@@ -12,7 +12,7 @@ const Home = () => {
   const { signed, user } = useContext(AuthContext);
 
   return (
-    <Container>
+    <Container data-test="page-home">
       <h1>Emprestaê</h1>
       <div>
         <WelcomeContainer>
@@ -24,13 +24,13 @@ const Home = () => {
           {signed ? (
             <>
               <h3>Bem-vindo(a) {user?.name}</h3>
-              <Link to="/profile">
+              <Link data-test="link-see-profile" to="/profile">
                 <Button icon={FiUser}>Ver perfil</Button>
               </Link>
             </>
           ) : (
             <>
-              <Link to="/login">
+              <Link data-test="link-login" to="/login">
                 <Button icon={FiLogIn}>Login</Button>
               </Link>
               <Link to="/sign-up">

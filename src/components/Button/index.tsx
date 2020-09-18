@@ -9,7 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button: React.FC<ButtonProps> = ({ icon: Icon, children, ...props }) => {
   return (
-    <Container {...props}>
+    <Container data-test="component-button" {...props}>
       {Icon && (
         <div>
           <Icon />

@@ -10,7 +10,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Input: React.FC<InputProps> = ({ icon: Icon, ...props }) => {
   return (
-    <Container>
+    <Container data-test="component-input">
       {Icon && <Icon />}
       <input {...props} />
     </Container>

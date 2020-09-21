@@ -1,5 +1,5 @@
 import React, { useContext, useState, ChangeEvent } from 'react';
-import { RouteComponentProps, Link } from 'react-router-dom';
+import { RouteComponentProps, Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
@@ -29,9 +29,10 @@ const schema = Yup.object().shape({
     .required('A senha atual é obrigatória'),
 });
 
-const ChangePassword: React.FC<RouteComponentProps> = ({ history }) => {
+const ChangePassword = () => {
   const { user } = useContext(AuthContext);
   const [formData, setFormData] = useState({} as FormData);
+  const history = useHistory();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -68,7 +69,7 @@ const ChangePassword: React.FC<RouteComponentProps> = ({ history }) => {
   }
 
   return (
-    <Container>
+    <Container data-test="page-change-password">
       <h1>Emprestaê</h1>
       <div>
         <Link to="/profile">
@@ -89,7 +90,7 @@ const ChangePassword: React.FC<RouteComponentProps> = ({ history }) => {
             placeholder="Confirmar nova senha"
             onChange={handleInputChange}
           />
-          <Button>Confirmar</Button>
+          <Button data-test="button-submit">Confirmar</Button>
         </form>
       </div>
     </Container>
